@@ -1,0 +1,43 @@
+@"
+# Python-related files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+*.env
+.env.local
+.env.production
+.env.development
+
+# Dependency files
+*.log
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Flask & Deployment
+instance/
+*.sqlite3
+*.db
+.DS_Store
+vercel/
+
+# Ignore compiled Python bytecode
+*.py[cod]
+
+# Ignore IDE/editor-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore node_modules if using Vercel or frontend dependencies
+node_modules/
+
+# Ignore cache files
+__pycache__/
+.cache/
+"@ | Out-File -Encoding utf8 .gitignore

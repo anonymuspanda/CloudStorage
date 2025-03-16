@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Cloud Storage</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        h1 {
+            color: darkmagenta;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: deeppink;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: darkmagenta;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        li {
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .file-name {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .file-actions input {
+            flex: 1;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .update-btn {
+            background-color: darkmagenta;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+
+        .update-btn:hover {
+            background-color: deeppink;
+        }
+
+        .delete-btn {
+            background-color: red;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+
+        .delete-btn:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Cloud Storage</h1>
+
+    <form id="uploadForm" action="/upload" method="POST">
+        <input type="text" name="filename" placeholder="Enter filename" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <ul id="fileList">
+        {% for file in files %}
+        <li>
+            <div class="file-name">{{ file }}</div>
+            <div class="file-actions">
+                <form action="/update/{{ loop.index0 }}" method="POST" style="display:flex; width:100%;">
+                    <input type="text" name="new_filename" placeholder="New name" required>
+                    <button class="update-btn" type="submit">Update</button>
+                </form>
+                <form action="/delete/{{ loop.index0 }}" method="POST" style="margin-left: 10px;">
+                    <button class="delete-btn" type="submit">Delete</button>
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
+
